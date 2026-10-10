@@ -42,8 +42,9 @@ void pgraph_gl_init_display(NV2AState *d)
     r->gl_display_buffer_type = 0;
 
     const char *vs =
-        "#version 330\n"
-        "void main()\n"
+        "#version 320 es\n"
+        "precision highp float;\n"
+        "precision highp int;\n"
         "{\n"
         "    float x = -1.0 + float((gl_VertexID & 1) << 2);\n"
         "    float y = -1.0 + float((gl_VertexID & 2) << 1);\n"
