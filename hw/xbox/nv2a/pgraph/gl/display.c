@@ -53,7 +53,9 @@ void pgraph_gl_init_display(NV2AState *d)
     /* FIXME: improve interlace handling, pvideo */
 
     const char *fs =
-        "#version 330\n"
+        "#version 320 es\n"
+        "precision highp float;\n"
+        "precision highp int;\n"
         "uniform sampler2D tex;\n"
         "uniform bool pvideo_enable;\n"
         "uniform sampler2D pvideo_tex;\n"
@@ -343,7 +345,7 @@ static void render_display(NV2AState *d, SurfaceBinding *surface)
     glBindVertexArray(r->disp_rndr.vao);
     glBindBuffer(GL_ARRAY_BUFFER, r->disp_rndr.vbo);
     glUseProgram(r->disp_rndr.prog);
-    glProgramUniform1i(r->disp_rndr.prog, r->disp_rndr.tex_loc, 0);
+    glUniform1i(r->disp_rndr.tex_loc, 0);
     glUniform2f(r->disp_rndr.display_size_loc, width, height);
     glUniform1f(r->disp_rndr.line_offset_loc, line_offset);
     render_display_pvideo_overlay(d);
@@ -355,7 +357,7 @@ static void render_display(NV2AState *d, SurfaceBinding *surface)
     glDisable(GL_STENCIL_TEST);
     glDisable(GL_CULL_FACE);
     glDisable(GL_DEPTH_TEST);
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+   // glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     glDrawArrays(GL_TRIANGLES, 0, 3);
