@@ -38,6 +38,7 @@ typedef struct {
 
 typedef struct GenGeomGlslOptions {
     bool vulkan;
+    bool gles;
 } GenGeomGlslOptions;
 
 void pgraph_glsl_set_geom_state(PGRAPHState *pg, GeomState *geom);
